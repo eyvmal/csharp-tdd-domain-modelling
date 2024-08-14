@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,18 @@ namespace tdd_domain_modelling.CSharp.Main
 
         public List<string> Receipt(List<Item> cart)
         {
-            return new List<string>();
+            List<string> receipt = new List<string>();
+
+            foreach (Item item in cart)
+            {
+                var amount = item.GetAmount();
+                var name = item.GetName();
+                var price = item.GetPrice();
+                var total = amount * price;
+                receipt.Add($"{amount}x {name} - {total}kr");
+            }
+
+            return receipt;
         }
     }
 }
