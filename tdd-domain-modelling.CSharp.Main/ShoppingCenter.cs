@@ -20,9 +20,9 @@ namespace tdd_domain_modelling.CSharp.Main
             return total;
         }
 
-        public Receipt Receipt(List<Item> cart)
+        public List<string> Receipt(List<Item> cart)
         {
-            return new Receipt();
+            return new List<string>();
         }
     }
 }

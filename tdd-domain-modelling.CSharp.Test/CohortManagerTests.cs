@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Collections;
 using tdd_domain_modelling.CSharp.Main;
 
 namespace tdd_domain_modelling.CSharp.Test
@@ -57,15 +58,74 @@ namespace tdd_domain_modelling.CSharp.Test
         [Test]
         public void TestCheckoutC()
         {
+
+            List<Item> list = new List<Item>();
+            list.Add(new Item("Brus", 29.90f, 3));
+            list.Add(new Item("Banan", 7.50f, 6));
+            list.Add(new Item("Tunfisk", 49.90f, 1));
+            list.Add(new Item("Sirkelsag", 2999.90f, 1));
+
+            ShoppingCenter sc = new Main.ShoppingCenter();
+            float o = sc.Checkout(list);
+
+            Assert.That(o, Is.EqualTo(750249.95f));
+        }
+
+        [Test]
+        public void TestReceiptA()
+        {
+            List<Item> list = new List<Item>();
+            list.Add(new Item("Brus", 29.90f, 3));
+            list.Add(new Item("Banan", 7.50f, 6));
+            list.Add(new Item("Tunfisk", 49.90f, 1));
+            list.Add(new Item("Sirkelsag", 2999.90f, 1));
+
+            ShoppingCenter sc = new Main.ShoppingCenter();
+            float o = sc.Checkout(list);
+
+            List<string> result = new List<string>();
+            result.Add(("1x Brus - 750000.0kr"));
+            result.Add(("5x Banan - 30.0kr"));
+            result.Add(("1x Tunfisk - 49.9kr"));
+            result.Add(("1x Sirkelsag - 2999.9kr"));
+
+            Assert.That(o, Is.EqualTo(result));
+        }
+
+        [Test]
+        public void TestReceiptB()
+        {
+            List<Item> list = new List<Item>();
+            list.Add(new Item("Boller", 10f, 1));
+            list.Add(new Item("Pantelapp", -13.50f, 1));
+
+            ShoppingCenter sc = new Main.ShoppingCenter();
+            float o = sc.Checkout(list);
+
+            List<string> result = new List<string>();
+            result.Add(("1x Brus - 10.0kr"));
+            result.Add(("1x Banan - -13.5kr"));
+
+            Assert.That(o, Is.EqualTo(result));
+        }
+
+        [Test]
+        public void TestReceiptC()
+        {
             List<Item> list = new List<Item>();
             list.Add(new Item("Albino Nesehorn", 750000f, 1));
             list.Add(new Item("Nesehornmat", 0, 5));
             list.Add(new Item("Leketøy", 49.99f, 5));
 
             ShoppingCenter sc = new Main.ShoppingCenter();
-            float o = sc.Checkout(list);
+            var o = sc.Checkout(list);
 
-            Assert.That(o, Is.EqualTo(750249.95f));
+            List<string> result = new List<string>();
+            result.Add(("1x Albino Nesehorn - 750000.0kr"));
+            result.Add(("5x Nesehornmat - 0.0kr"));
+            result.Add(("5x Leketøy - 249.95kr"));
+
+            Assert.That(o, Is.EqualTo(result));
         }
     }
 }
