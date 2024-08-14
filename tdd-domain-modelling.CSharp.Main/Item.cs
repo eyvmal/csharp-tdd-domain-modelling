@@ -23,5 +23,9 @@ namespace tdd_domain_modelling.CSharp.Main
         {
             _amount += amount;
         }
+
+        public string GetName() { return _name; }
+        public float GetPrice() { return _price; }
+        public int GetAmount() { return _amount; }
     }
 }

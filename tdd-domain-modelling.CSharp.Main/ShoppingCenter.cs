@@ -12,7 +12,12 @@ namespace tdd_domain_modelling.CSharp.Main
 
         public float Checkout(List<Item> cart)
         {
-            return 0;
+            float total = 0f;
+            foreach (Item item in cart)
+            {
+                total += item.GetPrice() * item.GetAmount();
+            }
+            return total;
         }
 
         public Receipt Receipt(List<Item> cart)

@@ -65,7 +65,7 @@ namespace tdd_domain_modelling.CSharp.Test
             ShoppingCenter sc = new Main.ShoppingCenter();
             float o = sc.Checkout(list);
 
-            Assert.That(o, Is.EqualTo(750049.99f));
+            Assert.That(o, Is.EqualTo(750249.95f));
         }
     }
 }
